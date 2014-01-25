@@ -18,6 +18,7 @@ Role Variables
       certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
       certificate_mail: info@example.org
 
+Don't forget to override these default values.
 
 Dependencies
 ------------
