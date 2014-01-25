@@ -1,6 +1,7 @@
 ---
 shibboleth_sp:
-  host: https://sp.example.org/shibboleth
+  host: sp.example.org
+  default_idp: https://idp.example.org/idp/shibboleth
   federation_signer_certificate_url: https://your-federation.com/federation_signer_certificate.crt
   federation_metadata_url: http://your-federation.com/federation.xml
   certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
