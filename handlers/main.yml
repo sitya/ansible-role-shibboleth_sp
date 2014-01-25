@@ -1,0 +1,4 @@
+- name: Restart shibd
+  sudo: yes
+  service: name=shibd
+           state=restarted

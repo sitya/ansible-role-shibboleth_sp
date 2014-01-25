@@ -1,0 +1,1 @@
+- include: shibboleth_sp.yml tags=shibboleth_sp

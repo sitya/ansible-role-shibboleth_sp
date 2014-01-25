@@ -1,0 +1,51 @@
+<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"    
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    clockSkew="180">
+
+    <RequestMapper type="Native">
+        <RequestMap applicationId="default">
+            <Host name="{{ shibboleth_sp.host }}" authType="shibboleth" requireSession="false">
+                <Path name="secure" authType="shibboleth" requireSession="true"/>
+            </Host>
+        </RequestMap>
+    </RequestMapper>
+
+    <ApplicationDefaults entityID="https://{{ shibboleth_sp.host }}/shibboleth"
+                         REMOTE_USER="eppn persistent-id targeted-id">   
+
+        <Sessions lifetime="28800" timeout="3600" checkAddress="false" relayState="ss:mem" handlerSSL="false">
+            <SSO entityID="{{ shibboleth_sp.default_idp }}">
+              SAML2
+            </SSO>
+            <Logout>SAML2 Local</Logout>
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+            <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+            <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
+        </Sessions>
+
+        <MetadataProvider type="XML" uri="{{ shibboleth_sp.federation_metadata_url }}"
+              backingFilePath="federation.xml" reloadInterval="7200">
+            <MetadataFilter type="Signature" certificate="federation_signer.crt"/>
+        </MetadataProvider>         
+
+        <AttributeExtractor type="XML" validate="true" path="attribute-map.xml"/>
+
+        <AttributeResolver type="Query" subjectMatch="true"/>
+
+        <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+
+        <CredentialResolver type="File" key="{{ shibboleth_sp.host}}.shibboleth.key" certificate="{{ shibboleth_sp.host}}.shibboleth.crt"/>
+
+        <!--
+        <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
+        -->
+    </ApplicationDefaults>
+
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+    <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+                                                                                                              
+</SPConfig>            
