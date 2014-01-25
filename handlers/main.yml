@@ -4,3 +4,8 @@
   sudo: yes
   service: name=shibd
            state=restarted
+
+- name: Restart httpd
+  sudo: yes
+  service: name=apache2
+           state=restarted
