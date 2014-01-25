@@ -1,3 +1,5 @@
+---
+# handlers file for shibboleth_sp
 - name: Restart shibd
   sudo: yes
   service: name=shibd

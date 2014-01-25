@@ -1,1 +1,3 @@
+---
+# tasks file for shibboleth_sp
 - include: shibboleth_sp.yml tags=shibboleth_sp

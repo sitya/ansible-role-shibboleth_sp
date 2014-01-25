@@ -1,4 +1,5 @@
 ---
+# defaults file for shibboleth_sp
 shibboleth_sp:
   host: sp.example.org
   default_idp: https://idp.example.org/idp/shibboleth

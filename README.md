@@ -1,8 +1,16 @@
-# Shibboleth SP - Ansible role
+Shibboleth SP - Ansible role
+========
 
 This role installs and configures a Shibboleth2 SP on Debian based systems.
 
-## Role Variables
+Requirements
+------------
+
+This role requires Ansible 1.4 or higher and platform requirements are listed in the metadata file.
+
+Role Variables
+--------------
+
     shibboleth_sp:
       host: sp.example.org
       federation_signer_certificate_url: https://your-federation.com/federation_signer_certificate.crt
@@ -10,12 +18,18 @@ This role installs and configures a Shibboleth2 SP on Debian based systems.
       certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
       certificate_mail: info@example.org
 
-Don't forget to override these default values.
 
-## Dependencies
+Dependencies
+------------
 
 None
 
-## Author Information
+License
+-------
+
+BSD
+
+Author Information
+------------------
 
 Tamas Frank <sitya@niif.hu>
