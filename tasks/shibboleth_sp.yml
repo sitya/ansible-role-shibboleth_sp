@@ -1,15 +1,21 @@
-- name: Install apache2 shibboleth module
+- name: Install apache2 and shibboleth module
   sudo: yes
-  apt: name=libapache2-mod-shib2
-       state=installed
+  when: ansible_os_family == 'Debian'
+  apt: pkg={{ item }} state=present
+  with_items:
+    - python-pip
+    - apache2
+    - libapache2-mod-shib2
 
 - name: Enable apache2 shibboleth modul
   sudo: yes
   command: a2enmod shib2
-  notify: Restart httpd
+  notify:
+    - restart httpd
 
 # Configure Shiboleth SP
 - name: Download federation metadata signing certificate
+  when: shibboleth_sp.federation_signer_certificate_url is defined and shibboleth_sp.federation_signer_certificate_url
   sudo: yes
   get_url: url={{ shibboleth_sp.federation_signer_certificate_url }}
            dest=/etc/shibboleth/federation_signer.crt
@@ -23,4 +29,10 @@
   sudo: yes
   template: dest=/etc/shibboleth/shibboleth2.xml
             src=shibboleth2.xml.j2
-  notify: Restart shibd
+  notify: restart shibd
+
+- name: Setup shibboleth2 attribute-map.xml
+  sudo: yes
+  template: dest=/etc/shibboleth/attribute-map.xml
+            src=attribute-map.xml.j2
+  notify: restart shibd

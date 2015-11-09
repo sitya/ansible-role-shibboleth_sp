@@ -13,7 +13,7 @@
         </RequestMap>
     </RequestMapper>
 
-    <ApplicationDefaults entityID="https://{{ shibboleth_sp.host }}/shibboleth"
+    <ApplicationDefaults entityID="https://{{ shibboleth_sp.host }}/{{ shibboleth_sp.app_name|default('shibboleth') }}"
                          REMOTE_USER="eppn persistent-id targeted-id">   
 
         <Sessions lifetime="28800" timeout="3600" checkAddress="false" relayState="ss:mem" handlerSSL="false">
@@ -29,7 +29,9 @@
 
         <MetadataProvider type="XML" uri="{{ shibboleth_sp.federation_metadata_url }}"
               backingFilePath="federation.xml" reloadInterval="7200">
-            <MetadataFilter type="Signature" certificate="federation_signer.crt"/>
+              {% if shibboleth_sp.federation_signer_certificate_url %}
+              <MetadataFilter type="Signature" certificate="federation_signer.crt"/>
+              {% endif %}
         </MetadataProvider>         
 
         <AttributeExtractor type="XML" validate="true" path="attribute-map.xml"/>
@@ -40,9 +42,6 @@
 
         <CredentialResolver type="File" key="{{ shibboleth_sp.host}}.shibboleth.key" certificate="{{ shibboleth_sp.host}}.shibboleth.crt"/>
 
-        <!--
-        <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
-        -->
     </ApplicationDefaults>
 
     <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>

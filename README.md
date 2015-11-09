@@ -1,7 +1,7 @@
 Shibboleth SP - Ansible role
 ========
 
-This role installs and configures a Shibboleth2 SP on Debian based systems.
+This role installs and configures a Shibboleth2 SP against Azure AD, supports CentOS/Debian/Fedora based systems.
 
 Requirements
 ------------
@@ -13,7 +13,7 @@ Role Variables
 
     shibboleth_sp:
       host: sp.example.org
-      federation_signer_certificate_url: https://your-federation.com/federation_signer_certificate.crt
+      default_idp: https://sts.windows.net/your-azure_ad_idp/
       federation_metadata_url: http://your-federation.com/federation.xml
       certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
       certificate_mail: info@example.org
@@ -33,4 +33,5 @@ BSD
 Author Information
 ------------------
 
-Tamas Frank <sitya@niif.hu>
+* Juan Pablo Giménez <jpg@rosario.com>
+* base on https://github.com/sitya/ansible-role-shibboleth_sp/ - Tamas Frank <sitya@niif.hu>
