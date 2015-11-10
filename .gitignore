@@ -1,3 +1,4 @@
 .project
 .vagrant
 ._*
+test-vars.yml

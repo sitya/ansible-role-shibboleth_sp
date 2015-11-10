@@ -13,12 +13,37 @@ Role Variables
 
     shibboleth_sp:
       host: sp.example.org
-      default_idp: https://sts.windows.net/your-azure_ad_idp/
       federation_metadata_url: http://your-federation.com/federation.xml
+      default_idp: https://sts.windows.net/your-azure_ad_idp/
       certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
       certificate_mail: info@example.org
 
+#### host:
+Your AD domain name
+
+#### federation_metadata_url:
+URL of AD FederationMetadata.xml
+
+#### default_idp:
+You can found this value inside federation metadata xml, under entityID attribute.
+
+#### certificate_*:
+shibboleth uses a self signed certificate, this values are used on the generation of that certificate.
+
 Don't forget to override these default values.
+
+Testing
+-------
+
+Create a test_vars.yml file and define role variables.
+
+To test with default vagrant vm:
+
+	$ vagrant up test
+
+You can test against other distros too, ej. f23:
+
+	$ vagrant up f23
 
 Dependencies
 ------------
