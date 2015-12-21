@@ -1,0 +1,22 @@
+- name: Install apache2 and shibboleth module
+  sudo: yes
+  when: shibboleth_sp.webserver == 'apache' and ansible_os_family == 'Debian'
+  apt: pkg={{ item }} state=present
+  with_items:
+    - python-pip
+    - apache2
+    - libapache2-mod-shib2
+
+- name: Enable apache2 shibboleth module
+  sudo: yes
+  when: shibboleth_sp.webserver == 'apache' and ansible_os_family == 'Debian'
+  command: a2enmod shib2
+  notify:
+    - restart httpd
+
+- name: Enable apache2 ssl module
+  sudo: yes
+  when: shibboleth_sp.webserver == 'apache' and ansible_os_family == 'Debian'
+  command: a2enmod ssl
+  notify:
+    - restart httpd

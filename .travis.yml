@@ -13,6 +13,7 @@ install:
   # Install Ansible.
   - pip install ansible
   - echo "localhost" > inventory
+  - cp test_vars.yml-sample test_vars.yml
 
 script:
   # Check the role/playbook's syntax.

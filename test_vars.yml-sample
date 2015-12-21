@@ -1,0 +1,8 @@
+shibboleth_sp:
+      host: localhost
+      webserver: apache
+      federation_metadata_url: https://login.microsoftonline.com/<tenant_id>/federationmetadata/2007-06/federationmetadata.xml
+      federation_signer_certificate_url: False
+      default_idp: https://sts.windows.net/<tenant_id>/
+      certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
+      certificate_mail: info@example.org
