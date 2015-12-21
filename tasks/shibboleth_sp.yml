@@ -7,9 +7,15 @@
     - apache2
     - libapache2-mod-shib2
 
-- name: Enable apache2 shibboleth modul
+- name: Enable apache2 shibboleth module
   sudo: yes
   command: a2enmod shib2
+  notify:
+    - restart httpd
+
+- name: Enable apache2 ssl module
+  sudo: yes
+  command: a2enmod ssl
   notify:
     - restart httpd
 
@@ -36,3 +42,9 @@
   template: dest=/etc/shibboleth/attribute-map.xml
             src=attribute-map.xml.j2
   notify: restart shibd
+
+- name: Enable apache2 default-ssl site
+  sudo: yes
+  command: a2ensite default-ssl
+  notify:
+    - restart httpd

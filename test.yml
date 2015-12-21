@@ -12,6 +12,11 @@
 
     - include: tasks/main.yml
 
+    - name: restart httpd
+      sudo: yes
+      service: name=apache2
+               state=restarted
+
     - pip: name=httplib2
 
     - name: Check to see if apache is running
