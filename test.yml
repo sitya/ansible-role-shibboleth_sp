@@ -17,24 +17,5 @@
       service: name=apache2
                state=restarted
 
-    - pip: name=httplib2
-
-    - command: curl -v http://127.0.0.1/
-
-    - name: Check to see if apache is running
-      uri:
-        url: http://127.0.0.1:80/
-        method: GET
-        return_content: yes
-        timeout: 60
-        status_code: 200
-
-    - name: Check to see if apache shib2 module is loaded
-      uri:
-        url: https://127.0.0.1:443/Shibboleth.sso/Status
-        method: GET
-        status_code: 200
-        validate_certs: no
-
   handlers:
     - include: handlers/main.yml
