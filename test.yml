@@ -19,12 +19,14 @@
 
     - pip: name=httplib2
 
-    - command: netstat -ltnp
+    - command: curl -v http://127.0.0.1/
 
     - name: Check to see if apache is running
       uri:
         url: http://127.0.0.1:80/
         method: GET
+        return_content: yes
+        timeout: 60
         status_code: 200
 
     - name: Check to see if apache shib2 module is loaded
