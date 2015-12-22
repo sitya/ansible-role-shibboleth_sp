@@ -24,7 +24,7 @@ script:
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -vvv -i inventory $SITE --connection=local --sudo"
 
-  - "netstat -ltnp"
+  - "sudo netstat -ltnp"
 
   - "curl -s http://127.0.0.1/"
 
