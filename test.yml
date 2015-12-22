@@ -17,5 +17,18 @@
       service: name=apache2
                state=restarted
 
+    - name: Check to see if apache is running
+      uri:
+        url: http://127.0.0.1:80/
+        method: GET
+        status_code: 200
+
+    - name: Check to see if apache shib2 module is loaded
+      uri:
+        url: https://127.0.0.1:443/Shibboleth.sso/Status
+        method: GET
+        status_code: 200
+        validate_certs: no
+
   handlers:
     - include: handlers/main.yml

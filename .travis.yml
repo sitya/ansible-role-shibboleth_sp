@@ -11,23 +11,13 @@ before_install:
  
 install:
   # Install Ansible.
-  - pip install ansible httplib2
-  - which ansible-playbook
-  - ansible-playbook --version
+  - pip install ansible
   - echo "localhost" > inventory
   - cp test_vars.yml-sample test_vars.yml
 
 script:
-  - "sudo netstat -ltnp"
-
   # Check the role/playbook's syntax.
   - "ansible-playbook -i inventory $SITE --syntax-check"
 
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i inventory $SITE --connection=local --sudo"
-
-  - "sudo netstat -ltnp"
-
-  - "curl -s http://localhost/"
-
-  - "curl -s -k https://127.0.0.1:443/Shibboleth.sso/Status"
