@@ -19,6 +19,8 @@
 
     - pip: name=httplib2
 
+    - command: netstat -ltnp
+
     - name: Check to see if apache is running
       uri:
         url: http://127.0.0.1:80/
