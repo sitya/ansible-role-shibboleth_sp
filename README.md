@@ -3,6 +3,8 @@ Shibboleth SP - Ansible role
 
 This role installs and configures a Shibboleth2 SP against Azure AD, supports CentOS/Debian/Fedora based systems.
 
+[![Build Status](https://travis-ci.org/jpgimenez/ansible-shibboleth_sp-azure_ad.svg?branch=master)](https://travis-ci.org/jpgimenez/ansible-shibboleth_sp-azure_ad)
+
 Requirements
 ------------
 
