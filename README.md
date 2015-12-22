@@ -13,12 +13,17 @@ This role requires Ansible 1.4 or higher and platform requirements are listed in
 Role Variables
 --------------
 
+    # sample configuration
+    # replace "contoso.com" with your "tenant id"
+    #
     shibboleth_sp:
-      host: sp.example.org
-      federation_metadata_url: http://your-federation.com/federation.xml
-      default_idp: https://sts.windows.net/your-azure_ad_idp/
-      certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
-      certificate_mail: info@example.org
+          host: localhost
+          webserver: apache
+          federation_metadata_url: https://login.microsoftonline.com/contoso.com/federationmetadata/2007-06/federationmetadata.xml
+          federation_signer_certificate_url: False
+          default_idp: https://sts.windows.net/contoso.com/
+          certificate_subject: "C=HU/ST=Your state/L=Your city/O=Your Company"
+          certificate_mail: info@example.org
 
 #### host:
 Your AD domain name
