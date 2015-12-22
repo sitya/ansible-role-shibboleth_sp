@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     test.vm.provision "ansible" do |ansible|
       ansible.playbook = "test.yml"
+#      ansible.verbose = "vvv"
     end
   end
 
