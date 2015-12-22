@@ -12,6 +12,8 @@ before_install:
 install:
   # Install Ansible.
   - pip install ansible httplib2
+  - which ansible-playbook
+  - ansible-playbook --version
   - echo "localhost" > inventory
   - cp test_vars.yml-sample test_vars.yml
 
