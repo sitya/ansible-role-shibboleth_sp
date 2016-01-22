@@ -6,7 +6,7 @@ This role installs and configures a Shibboleth2 SP on Debian based systems.
 Requirements
 ------------
 
-This role requires Ansible 1.4 or higher and platform requirements are listed in the metadata file.
+This role requires Ansible 1.6 or higher and platform requirements are listed in the metadata file.
 
 Role Variables
 --------------

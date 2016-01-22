@@ -2,10 +2,12 @@
 # handlers file for shibboleth_sp
 - name: Restart shibd
   sudo: yes
-  service: name=shibd
-           state=restarted
+  service:
+    name: shibd
+    state: restarted
 
 - name: Restart httpd
   sudo: yes
-  service: name=apache2
-           state=restarted
+  service:
+    name: apache2
+    state: restarted
