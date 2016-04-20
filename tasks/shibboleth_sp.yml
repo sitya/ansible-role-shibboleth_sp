@@ -1,30 +1,30 @@
 - name: Install apache2 shibboleth module
-  sudo: yes
+  become: yes
   apt:
     name: libapache2-mod-shib2
     state: installed
 
 - name: Enable apache2 shibboleth module
-  sudo: yes
+  become: yes
   apache2_module:
     name: shib2
   notify: Restart httpd
 
 # Configure Shiboleth SP
 - name: Download federation metadata signing certificate
-  sudo: yes
+  become: yes
   get_url:
     url: "{{ shibboleth_sp.federation_signer_certificate_url }}"
     dest: /etc/shibboleth/federation_signer.crt
 
 - name: Create self-signed SSL cert
-  sudo: yes
-  command:
-    args: openssl req -new -nodes -x509 -subj "/{{ shibboleth_sp.certificate_subject }}/CN={{ shibboleth_sp.host }}/emailAddress={{ shibboleth_sp.certificate_mail }} " -days 3650 -keyout /etc/shibboleth/{{ shibboleth_sp.host }}.shibboleth.key -out /etc/shibboleth/{{ shibboleth_sp.host }}.shibboleth.crt
+  become: yes
+  command: openssl req -new -nodes -x509 -subj "/{{ shibboleth_sp.certificate_subject }}/CN={{ shibboleth_sp.host }}/emailAddress={{ shibboleth_sp.certificate_mail }} " -days 3650 -keyout /etc/shibboleth/{{ shibboleth_sp.host }}.shibboleth.key -out /etc/shibboleth/{{ shibboleth_sp.host }}.shibboleth.crt
+  args:
     creates: /etc/shibboleth/{{ shibboleth_sp.host }}.shibboleth.key
 
 - name: Setup shibboleth2.xml
-  sudo: yes
+  become: yes
   template:
     dest: /etc/shibboleth/shibboleth2.xml
     src: shibboleth2.xml.j2
