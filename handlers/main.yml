@@ -8,5 +8,12 @@
 
 - name: restart httpd
   sudo: yes
+  when: ansible_os_family == 'Debian'
   service: name=apache2
+           state=restarted
+
+- name: restart httpd
+  sudo: yes
+  when: ansible_os_family == 'CentOS'
+  service: name=httpd
            state=restarted

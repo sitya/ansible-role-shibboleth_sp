@@ -28,13 +28,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "centos70", primary: false, autostart: false do |centos70|
-    centos70.vm.box = "chef/centos-7.0"
+  config.vm.define "centos7", primary: false, autostart: false do |centos7|
+    centos7.vm.box = "centos/7"
 
-    test.vm.network "forwarded_port", guest: 80, host: 8080
-    test.vm.network "forwarded_port", guest: 443, host: 8081
+    centos7.vm.network "forwarded_port", guest: 80, host: 8080
+    centos7.vm.network "forwarded_port", guest: 443, host: 8081
 
-    centos70.vm.provision "ansible" do |ansible|
+    centos7.vm.provision "ansible" do |ansible|
       ansible.playbook = "test.yml"
       ansible.verbose = "vvv"
     end
