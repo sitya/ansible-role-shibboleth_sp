@@ -14,7 +14,7 @@
     </RequestMapper>
 
     <ApplicationDefaults entityID="https://{{ shibboleth_sp.host }}/{{ shibboleth_sp.app_name|default('shibboleth') }}"
-                         REMOTE_USER="eppn persistent-id targeted-id">   
+                         REMOTE_USER="{{ shibboleth_sp.remote_user|default('eppn persistent-id targeted-id') }}">   
 
         <Sessions lifetime="28800" timeout="3600" checkAddress="false" relayState="ss:mem" handlerSSL="false">
             <SSO entityID="{{ shibboleth_sp.default_idp }}">

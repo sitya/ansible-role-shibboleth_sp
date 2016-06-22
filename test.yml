@@ -20,7 +20,7 @@
 
     - name: restart httpd
       sudo: yes
-      when: ansible_os_family == 'CentOS'
+      when: ansible_os_family == 'RedHat'
       service: name=httpd
                state=restarted
 
